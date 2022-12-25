@@ -1,12 +1,9 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-const mapDBToModel = ({ id, title, body, tags, created_at, updated_at }) => ({
+const mapDBToModel = ({ id, name, year }) => ({
   id,
-  title,
-  body,
-  tags,
-  createdAt: created_at,
-  updatedAt: updated_at,
+  name,
+  year,
 });
 
 module.exports = { mapDBToModel };

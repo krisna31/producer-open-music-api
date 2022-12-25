@@ -20,7 +20,7 @@ class AlbumsService {
     const result = await this._pool.query(query);
 
     if (!result.rows[0].id) {
-      throw new InvariantError("Catatan gagal ditambahkan");
+      throw new InvariantError("Album gagal ditambahkan");
     }
 
     return result.rows[0].id;
@@ -39,7 +39,7 @@ class AlbumsService {
     const result = await this._pool.query(query);
 
     if (!result.rows.length) {
-      throw new NotFoundError("Catatan tidak ditemukan");
+      throw new NotFoundError("Album tidak ditemukan");
     }
 
     return result.rows.map(mapDBToModel)[0];
@@ -54,7 +54,7 @@ class AlbumsService {
     const result = await this._pool.query(query);
 
     if (!result.rows.length) {
-      throw new NotFoundError("Gagal memperbarui catatan. Id tidak ditemukan");
+      throw new NotFoundError("Gagal memperbarui Album. Id tidak ditemukan");
     }
   }
 
@@ -67,7 +67,7 @@ class AlbumsService {
     const result = await this._pool.query(query);
 
     if (!result.rows.length) {
-      throw new NotFoundError("Catatan gagal dihapus. Id tidak ditemukan");
+      throw new NotFoundError("Album gagal dihapus. Id tidak ditemukan");
     }
   }
 }
