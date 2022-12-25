@@ -1,9 +1,25 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
-const mapDBToModel = ({ id, name, year }) => ({
+const mapDBAlbumToModel = ({ id, name, year }) => ({
   id,
   name,
   year,
 });
 
-module.exports = { mapDBToModel };
+const mapDBSongsToModel = ({ id, title, performer }) => ({
+  id,
+  title,
+  performer,
+});
+
+const mapDBSongToModel = ({ id, title, year, performer, genre, duration, albumId }) => ({
+  id,
+  title,
+  year,
+  performer,
+  genre,
+  duration,
+  albumId,
+});
+
+module.exports = { mapDBAlbumToModel, mapDBSongToModel, mapDBSongsToModel };
