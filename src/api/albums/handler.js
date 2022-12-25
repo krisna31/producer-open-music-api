@@ -1,6 +1,6 @@
 const ClientError = require("../../exceptions/ClientError");
 
-class NotesHandler {
+class AlbumHandler {
   constructor(service, validator) {
     this._service = service;
     this._validator = validator;
@@ -153,4 +153,4 @@ class NotesHandler {
   }
 }
 
-module.exports = NotesHandler;
+module.exports = AlbumHandler;
