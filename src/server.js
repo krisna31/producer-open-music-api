@@ -20,11 +20,18 @@ const AuthenticationsService = require("./services/postgres/AuthenticationsServi
 const TokenManager = require("./tokenize/TokenManager");
 const AuthenticationsValidator = require("./validator/authentications");
 
+const playlists = require("./api/playlists");
+const PlaylistsService = require("./services/postgres/PlaylistsService");
+const PlaylistSongsService = require("./services/postgres/PlaylistsSongsService");
+const PlaylistsValidator = require("./validator/playlists");
+
 const init = async () => {
   const albumsService = new AlbumsService();
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
+  const playlistsService = new PlaylistsService();
+  const playlistSongsService = new PlaylistSongsService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -40,7 +47,7 @@ const init = async () => {
     },
   ]);
 
-  server.auth.strategy("notesapp_jwt", "jwt", {
+  server.auth.strategy("openmusic_jwt", "jwt", {
     keys: process.env.ACCESS_TOKEN_KEY,
     verify: {
       aud: false,
@@ -87,6 +94,15 @@ const init = async () => {
         validator: AuthenticationsValidator,
       },
     },
+    {
+      plugin: playlists,
+      options: {
+        playlistsService,
+        playlistSongsService,
+        songsService,
+        validator: PlaylistsValidator,
+      },
+    },
   ]);
 
   server.ext("onPreResponse", (request, h) => {
@@ -109,7 +125,8 @@ const init = async () => {
       // penanganan server error sesuai kebutuhan
       const newResponse = h.response({
         status: "error",
-        message: "terjadi kegagalan pada server kami",
+        // message: "terjadi kegagalan pada server kami",
+        message: response.message,
       });
       newResponse.code(500);
       return newResponse;
