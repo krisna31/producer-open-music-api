@@ -34,7 +34,7 @@ const init = async () => {
   const songsService = new SongsService();
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
-  const playlistsService = new PlaylistsService();
+  const playlistsService = new PlaylistsService(new CollaborationsService());
   const playlistSongsService = new PlaylistSongsService();
   const collaborationsService = new CollaborationsService();
 
@@ -139,8 +139,9 @@ const init = async () => {
       // penanganan server error sesuai kebutuhan
       const newResponse = h.response({
         status: "error",
-        // message: "terjadi kegagalan pada server kami",
-        message: response.message,
+        //! FOR DEBUG ONLY DONT FORGET TO DEL OR COMMENT
+        // message: response.message,
+        message: "terjadi kegagalan pada server kami",
       });
       newResponse.code(500);
       return newResponse;
