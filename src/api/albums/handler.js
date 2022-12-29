@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
-const ClientError = require("../../exceptions/ClientError");
+// config
+const config = require("../../utils/config");
 
 class AlbumHandler {
-  constructor(service, validator) {
+  constructor(service, storageService, albumsService, uploadsValidator, validator) {
     this._service = service;
+    this._storageService = storageService;
+    this._albumsService = albumsService;
+    this._uploadsValidator = uploadsValidator;
     this._validator = validator;
   }
 
@@ -37,6 +41,7 @@ class AlbumHandler {
   async getAlbumByIdHandler(request, h) {
     const { id } = request.params;
     const album = await this._service.getAlbumById(id);
+
     return {
       status: "success",
       data: {
@@ -65,6 +70,27 @@ class AlbumHandler {
       status: "success",
       message: "Album berhasil dihapus",
     };
+  }
+
+  async postUploadCoverAlbumByIdHandler(request, h) {
+    const { cover } = request.payload;
+    const { id } = request.params;
+
+    this._uploadsValidator.validateImageHeaders(cover.hapi.headers);
+
+    const filename = await this._storageService.writeFile(cover, cover.hapi);
+    const coverUrl = `http://${config.app.host}:${config.app.port}/upload/images/${filename}`;
+
+    const { name, year } = await this._albumsService.getAlbumById(id);
+    await this._albumsService.editAlbumById(id, { name, year, coverUrl });
+
+    const response = h.response({
+      status: "success",
+      message: "Sampul berhasil diunggah",
+    });
+
+    response.code(201);
+    return response;
   }
 }
 
