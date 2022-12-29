@@ -134,7 +134,8 @@ const init = async () => {
     {
       plugin: _exports,
       options: {
-        service: ProducerService,
+        playlistsService,
+        producerService: ProducerService,
         validator: ExportsValidator,
       },
     },
@@ -161,8 +162,8 @@ const init = async () => {
       const newResponse = h.response({
         status: "error",
         //! FOR DEBUG ONLY DONT FORGET TO DEL OR COMMENT
-        // message: response.message,
-        message: "terjadi kegagalan pada server kami",
+        message: response.message,
+        // message: "terjadi kegagalan pada server kami",
       });
       newResponse.code(500);
       return newResponse;
