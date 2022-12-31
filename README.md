@@ -6,6 +6,8 @@
 
 this is a repo that used to store my submission in dicoding.
 
+the repo has 4 branch which the latest one is the `open_music_api_versi_3 branch`
+
 # Restrictions!⚠️
 
 for learn only! or you can read LICENSE.md, and <b>⚠️strictly not to use for submit submission in dicoding website with this repo.⚠️</b>
