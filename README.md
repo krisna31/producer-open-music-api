@@ -40,7 +40,7 @@ RABBITMQ_SERVER=amqp://localhost
 ```bash
 $ git clone https://github.com/krisna31/open_music_api.git
 $ cd dicoding-open-music-api
-$ npm install
+$ npm install OR `$ npm i`
 $ npm run migrate up
 $ npm run start-dev
 ```
