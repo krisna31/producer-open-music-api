@@ -6,7 +6,7 @@
 
 this is a repo that used to store my submission in dicoding.
 
-the repo has 4 branch which the latest one is the `open_music_api_versi_3 branch`
+the repo has <b>4 branch</b> which the latest one is the `openmusic_api_versi_3 branch`
 
 # Restrictions!⚠️
 
