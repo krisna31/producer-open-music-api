@@ -23,7 +23,7 @@ PORT=5000
 PGUSER=
 PGHOST=localhost
 PGPASSWORD=
-PGDATABASE=dicoding_open_music_api
+PGDATABASE=
 PGPORT=5432
 
 # JWT Token
