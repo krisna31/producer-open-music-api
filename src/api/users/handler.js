@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable object-curly-newline */
 class UserHandler {
   constructor(service, validator) {

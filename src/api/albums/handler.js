@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // config
 const config = require("../../utils/config");
 
