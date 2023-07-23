@@ -1,4 +1,5 @@
 // config
+const ClientError = require("../../exceptions/ClientError");
 const config = require("../../utils/config");
 
 class AlbumHandler {
@@ -101,7 +102,7 @@ class AlbumHandler {
     const albumUserLike = await this._albumsService.getAlbumLikeByUserId(credentialId, albumId);
 
     if (albumUserLike > 0) {
-      await this._albumsService.deleteAlbumLikeById(credentialId, albumId);
+      throw new ClientError("Like gagal ditambahkan. User sudah memberikan like pada album ini");
     } else {
       await this._albumsService.postAlbumLikeById(credentialId, albumId);
     }
@@ -112,6 +113,23 @@ class AlbumHandler {
     });
 
     response.code(201);
+    return response;
+  }
+
+  async deleteAlbumLikeByIdHandler(request, h) {
+    const { id: albumId } = request.params;
+    const { id: credentialId } = request.auth.credentials;
+
+    await this._albumsService.getAlbumById(albumId);
+
+    await this._albumsService.deleteAlbumLikeById(credentialId, albumId);
+
+    const response = h.response({
+      status: "success",
+      message: "Like pada album berhasil dihapus",
+    });
+
+    response.code(200);
     return response;
   }
 
